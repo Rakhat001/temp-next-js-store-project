@@ -7,20 +7,22 @@ import AddToCart from '@/components/single-product/AddToCart';
 import ProductRating from '@/components/single-product/ProductRating';
 
 
+interface SingleProductPageProps {
+  params: {
+    id: string | undefined;
+  };
+}
 
+async function SingleProductPage({ params }: SingleProductPageProps) {
+  const id = params.id ?? '';
 
-
-
-
-async function SingleProductPage({ params }: { params: { id: string } }) {
-
-  const product = await fetchSingleProduct(params.id);
+  const product = await fetchSingleProduct(id);
   const { name, image, company, description, price } = product;
   const dollarsAmount = formatCurrency(price);
 
 
   return (
-    <section>
+    <section> 
       <BreadCrumbs name={product.name} />
       <div className='mt-6 grid gap-y-8 lg:grid-cols-2 lg:gap-x-16'>
         {/* IMAGE FIRST COL */}
@@ -35,21 +37,21 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
             className='w-full rounded-md object-cover'
           />
         </div>
-        
+
         {/* PRODUCT INFO SECOND COL */}
 
         <div>
           <div className='flex gap-x-8 items-center'>
             <h1 className='capitalize text-3xl font-bold'>{name}</h1>
-            <FavoriteToggleButton productId={params.id} />
+            <FavoriteToggleButton productId={id} />
           </div>
-          <ProductRating productId={params.id} />
+          <ProductRating productId={id} />
           <h4 className='text-xl mt-2'>{company}</h4>
           <p className='mt-3 text-md bg-muted inline-block p-2 rounded-md'>
             {dollarsAmount}
           </p>
           <p className='mt-6 leading-8 text-muted-foreground'>{description}</p>
-          <AddToCart productId={params.id} />
+          <AddToCart productId={id} />
         </div>
       </div>
 
