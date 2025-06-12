@@ -4,8 +4,11 @@ import './globals.css';
 import Navbar from '@/components/navbar/Navbar';
 import Container from '@/components/home/Container';
 import Providers from './providers';
-import { ClerkProvider } from '@clerk/nextjs'
+import {
+  ClerkProvider
+} from '@clerk/nextjs'
 const inter = Inter({ subsets: ['latin'] });
+
 
 export const metadata: Metadata = {
   title: 'Next Storefront',
@@ -30,6 +33,8 @@ export default function RootLayout({
         </body>
       </html>
     </ClerkProvider>
-
   );
 }
+
+
+
