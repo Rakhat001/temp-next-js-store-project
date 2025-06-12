@@ -1,4 +1,6 @@
-'use client'
+
+'use client'; 
+
 import { Suspense } from "react"
 import Container from "../home/Container"
 import CartButton from "./CartButton"
@@ -7,7 +9,11 @@ import LinksDropdown from "./LinksDropdown"
 import Logo from "./Logo"
 import NavSearch from "./NavSearch"
 
-const Navbar = () => {
+interface NavbarProps {
+  userIconSlot: React.ReactNode; 
+}
+
+const Navbar = ({ userIconSlot }: NavbarProps) => {
   return (
     <nav className="border-b">
       <Container className="flex flex-col sm:flex-row sm:justify-between sm:items-center flex-wrap py-8 gap-4">
@@ -18,11 +24,13 @@ const Navbar = () => {
         <div className="flex gap-4 items-center">
           <CartButton />
           <DarkMode />
-          <LinksDropdown />
+          <Suspense>
+            <LinksDropdown userIconSlot={userIconSlot} />
+          </Suspense>
         </div>
       </Container>
     </nav>
   )
 }
 
-export default Navbar
+export default Navbar;
