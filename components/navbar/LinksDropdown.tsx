@@ -14,10 +14,11 @@ import SignOut from './SignOut';
 import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs';
 
 interface LinksDropdownProps {
-  userIconSlot: React.ReactNode;
+  userIconSlot: React.ReactNode,
+  isAdmin: boolean
 }
 
-function LinksDropdown({ userIconSlot }: LinksDropdownProps) {
+function LinksDropdown({ userIconSlot,isAdmin }: LinksDropdownProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -42,6 +43,7 @@ function LinksDropdown({ userIconSlot }: LinksDropdownProps) {
         </SignedOut>
         <SignedIn>
           {links.map((link) => {
+            if (link.label === 'dashboard' && !isAdmin) return null;
             return (
               <DropdownMenuItem key={link.href}>
                 <Link href={link.href} className='capitalize w-full'>
